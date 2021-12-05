@@ -3,6 +3,7 @@
 public class BoxesUsers : Entity
 {
     public int UserId { get; set; }
+
     public int BoxId { get; set; }
 
     public int? GiftToUserId { get; set; }
