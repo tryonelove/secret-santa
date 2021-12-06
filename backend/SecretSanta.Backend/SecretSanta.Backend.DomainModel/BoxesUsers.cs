@@ -1,6 +1,6 @@
 ﻿namespace SecretSanta.Backend.DomainModel;
 
-public class BoxesUsers : Entity
+public class UserBox : Entity
 {
     public int UserId { get; set; }
 
