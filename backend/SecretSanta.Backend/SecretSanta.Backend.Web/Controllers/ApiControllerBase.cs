@@ -3,7 +3,7 @@
 namespace SecretSanta.Backend.Web.Controllers;
 
 [ApiController]
-[Route("/api/[controller]/[action]")]
+[Route("/api/[controller]/")]
 public abstract class ApiControllerBase : ControllerBase
 {
 

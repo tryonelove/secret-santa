@@ -1,9 +1,6 @@
-using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using SecretSanta.Backend.Configurations;
 using SecretSanta.Backend.DataAccess;
-using SecretSanta.Backend.DomainModel;
-using SecretSanta.Backend.Foundation.Account;
-using SecretSanta.Backend.Foundation.Authentication;
+using SecretSanta.Backend.Foundation.UserServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +14,7 @@ builder.Services.Configure<RouteOptions>(options =>
     options.LowercaseUrls = true;
 });
 
-builder.Services.AddSecurity();
+builder.Services.AddFoundation();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -29,6 +26,10 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+else
+{
+    app.UseExceptionHandler("/error");
 }
 
 app.UseHttpsRedirection();

@@ -1,4 +1,4 @@
-﻿namespace SecretSanta.Backend.Foundation.Authentication.Models;
+﻿namespace SecretSanta.Backend.Foundation.UserServices.Models;
 
 public class UserDto
 {
@@ -7,6 +7,4 @@ public class UserDto
     public string Name { get; set; }
 
     public string Email { get; set; }
-
-    // public ICollection<BoxesUsers> BoxesUsers { get; set; }
 }
