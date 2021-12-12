@@ -4,6 +4,17 @@ using SecretSanta.Backend.Foundation.UserServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "cors",
+        corsBuilder =>
+        {
+            corsBuilder.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
+
 builder.Services.AddDataAccess(options =>
 {
     options.ConnectionString = builder.Configuration.GetConnectionString(DataAccessConfiguration.ConnectionString);
@@ -31,6 +42,10 @@ else
 {
     app.UseExceptionHandler("/error");
 }
+
+app.UseRouting();
+
+app.UseCors("cors");
 
 app.UseHttpsRedirection();
 
