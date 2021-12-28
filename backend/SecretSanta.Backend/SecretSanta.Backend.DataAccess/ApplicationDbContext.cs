@@ -9,7 +9,7 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<Box> Boxes { get; set; }
 
-    public DbSet<BoxesUsers> BoxesUsers { get; set; }
+    public DbSet<UserBox> UserBoxes { get; set; }
 
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)

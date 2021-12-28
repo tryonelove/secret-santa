@@ -44,7 +44,65 @@ namespace SecretSanta.Backend.DataAccess.Migrations
                     b.ToTable("Boxes");
                 });
 
-            modelBuilder.Entity("SecretSanta.Backend.DomainModel.BoxesUsers", b =>
+            modelBuilder.Entity("SecretSanta.Backend.DomainModel.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("SecretSanta.Backend.DomainModel.UserBox", b =>
                 {
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -73,35 +131,13 @@ namespace SecretSanta.Backend.DataAccess.Migrations
 
                     b.HasIndex("GiftToUserId");
 
-                    b.ToTable("BoxesUsers");
+                    b.ToTable("UserBoxes");
                 });
 
-            modelBuilder.Entity("SecretSanta.Backend.DomainModel.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("SecretSanta.Backend.DomainModel.BoxesUsers", b =>
+            modelBuilder.Entity("SecretSanta.Backend.DomainModel.UserBox", b =>
                 {
                     b.HasOne("SecretSanta.Backend.DomainModel.Box", "Box")
-                        .WithMany("BoxesUsers")
+                        .WithMany("UserBoxes")
                         .HasForeignKey("BoxId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -111,7 +147,7 @@ namespace SecretSanta.Backend.DataAccess.Migrations
                         .HasForeignKey("GiftToUserId");
 
                     b.HasOne("SecretSanta.Backend.DomainModel.User", "User")
-                        .WithMany("BoxesUsers")
+                        .WithMany("UserBoxes")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -125,12 +161,12 @@ namespace SecretSanta.Backend.DataAccess.Migrations
 
             modelBuilder.Entity("SecretSanta.Backend.DomainModel.Box", b =>
                 {
-                    b.Navigation("BoxesUsers");
+                    b.Navigation("UserBoxes");
                 });
 
             modelBuilder.Entity("SecretSanta.Backend.DomainModel.User", b =>
                 {
-                    b.Navigation("BoxesUsers");
+                    b.Navigation("UserBoxes");
                 });
 #pragma warning restore 612, 618
         }

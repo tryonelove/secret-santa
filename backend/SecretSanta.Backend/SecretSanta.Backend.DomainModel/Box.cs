@@ -8,5 +8,5 @@ public class Box : Entity
 
     public BoxStatus BoxStatus { get; set; }
 
-    public ICollection<BoxesUsers> BoxesUsers { get; set; }
+    public ICollection<UserBox> UserBoxes { get; set; }
 }
