@@ -7,6 +7,7 @@ public class GetByIdQuery : IRequest<UserDto>
 {
     public int Id { get; }
 
+
     public GetByIdQuery(int id)
     {
         Id = id;

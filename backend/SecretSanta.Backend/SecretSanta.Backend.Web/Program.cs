@@ -1,5 +1,6 @@
 using SecretSanta.Backend.Configurations;
 using SecretSanta.Backend.DataAccess;
+using SecretSanta.Backend.Foundation;
 using SecretSanta.Backend.Foundation.UserServices;
 
 var builder = WebApplication.CreateBuilder(args);

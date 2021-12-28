@@ -1,5 +1,4 @@
-﻿using System.Net;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SecretSanta.Backend.Foundation.UserServices.Commands;
 using SecretSanta.Backend.Foundation.UserServices.Models;
@@ -20,8 +19,8 @@ public class AccountController : ApiControllerBase
 
     [HttpPost]
     [Route("register")]
-    [ProducesResponseType(typeof(UserDto), (int)HttpStatusCode.OK)]
-    [ProducesResponseType(typeof(UserDto), (int)HttpStatusCode.BadRequest)]
+    [ProducesResponseType(typeof(UserDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(typeof(UserDto), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Register([FromBody] RegistrationDto registrationDto)
     {
         var user = new UserDto
@@ -44,7 +43,7 @@ public class AccountController : ApiControllerBase
 
     [HttpGet]
     [Route("")]
-    [ProducesResponseType(typeof(UserDto), (int)HttpStatusCode.OK)]
+    [ProducesResponseType(typeof(UserDto), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAll(GetUsersQuery command)
     {
         var result = await _mediator.Send(command);
@@ -54,8 +53,8 @@ public class AccountController : ApiControllerBase
 
     [HttpGet]
     [Route("{id:int}")]
-    [ProducesResponseType(typeof(UserDto), (int)HttpStatusCode.OK)]
-    [ProducesResponseType((int)HttpStatusCode.NotFound)]
+    [ProducesResponseType(typeof(UserDto), StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(int id)
     {
         var command = new GetByIdQuery(id);

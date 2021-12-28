@@ -2,8 +2,9 @@
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using SecretSanta.Backend.DataAccess;
+using SecretSanta.Backend.DomainModel;
 
-namespace SecretSanta.Backend.Foundation.UserServices;
+namespace SecretSanta.Backend.Foundation;
 
 public static class ServiceCollectionExtension
 {
@@ -13,7 +14,7 @@ public static class ServiceCollectionExtension
 
         services.AddMediatR(Assembly.GetExecutingAssembly());
 
-        services.AddDefaultIdentity<DomainModel.User>(options =>
+        services.AddDefaultIdentity<User>(options =>
             {
                 options.Password.RequiredLength = 6;
                 options.Password.RequireLowercase = true;
