@@ -1,4 +1,4 @@
-import { HttpRequest } from '../constants';
+import { defaultFetchParams, HttpRequest } from '../constants';
 import { REGISTER_URL } from './constants';
 
 export const register = async (email: string, name: string, password: string) => {
@@ -8,14 +8,17 @@ export const register = async (email: string, name: string, password: string) =>
         password: password
     };
 
-    const response = await fetch(REGISTER_URL, {
+    const request = await fetch(REGISTER_URL, {
+        ...defaultFetchParams,
         method: HttpRequest.POST,
-        headers: {
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*',
-        },
         body: JSON.stringify(body)
     });
 
-    return response.json();
+    if (!request.ok) {
+        throw Error(request.statusText);
+    }
+
+    const response = request.json();
+
+    return response;
 }

@@ -1,15 +1,8 @@
 import { Field, Form, Formik } from 'formik';
 import { useNavigate } from 'react-router-dom';
-import * as Yup from 'yup';
-import { register } from '../../api/register/api';
 
-const registrationValidationSchema = Yup.object().shape({
-  name: Yup.string()
-    .min(2, 'Слишком короткое имя.')
-    .required('Имя обязательно.'),
-  email: Yup.string().email('Неверный email.').required('email обязателен.'),
-  password: Yup.string().required('Пароль обязателен.'),
-});
+import { register } from '../../api/register/api';
+import { registrationValidationSchema } from './validationSchema';
 
 export function Registration() {
   const navigate = useNavigate();

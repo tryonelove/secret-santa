@@ -6,3 +6,14 @@ export enum HttpRequest {
     PUT = 'PUT',
     DELETE = 'DELETE'
 }
+
+export enum Mode {
+    CORS = 'cors'
+}
+
+export const defaultFetchParams = {
+    mode: Mode.CORS,
+    headers: {
+        'Content-Type': 'application/json',
+    },
+}
