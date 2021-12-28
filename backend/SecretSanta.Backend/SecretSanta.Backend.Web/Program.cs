@@ -3,17 +3,16 @@ using SecretSanta.Backend.DataAccess;
 using SecretSanta.Backend.Foundation.UserServices;
 
 var builder = WebApplication.CreateBuilder(args);
+var corsConfiguration = builder.Configuration.GetSection(CorsConfiguration.Name).Get<CorsConfiguration>();
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(name: "cors",
-        corsBuilder =>
-        {
-            corsBuilder.AllowAnyOrigin()
-                .AllowAnyHeader()
-                .AllowAnyMethod();
-        });
-});
+builder.Services.AddCors(corsOptions =>
+    corsOptions.AddPolicy(CorsConfiguration.Name, corsPolicyBuilder =>
+    {
+        corsPolicyBuilder
+            .WithOrigins(corsConfiguration.Origins)
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    }));
 
 builder.Services.AddDataAccess(options =>
 {
@@ -45,7 +44,7 @@ else
 
 app.UseRouting();
 
-app.UseCors("cors");
+app.UseCors(CorsConfiguration.Name);
 
 app.UseHttpsRedirection();
 
