@@ -6,6 +6,6 @@
     ],
     "rules": {
         "prefer-const": "error",
-        "no-unused-vars": "error"
+        "no-unused-vars": "off"
     }
 }
